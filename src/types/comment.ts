@@ -1,3 +1,4 @@
+import { Article } from "./article";
 /**
  * コメントを投稿するためのクラス.
  */

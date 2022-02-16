@@ -10,6 +10,8 @@
         投稿内容:
         <textarea v-model="articleContent" rows="5" cols="70"></textarea>
       </div>
+      <br />
+
       <button type="button" v-on:click="addArticle()">記事投稿</button>
     </form>
     <hr />
@@ -17,14 +19,22 @@
       <div>記事ID：{{ article.id }}</div>
       <div>投稿者名：{{ article.name }}</div>
       <div>投稿内容：{{ article.content }}</div>
+      <br />
+      <hr />
+
+      <div v-for="comment of article.commentList" v-bind:key="comment.id">
+        <div>コメント者名：{{ comment.name }}</div>
+        <div>コメント内容：{{ comment.content }}</div>
+        <br />
+      </div>
     </div>
-    <hr />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Article } from "@/types/article";
+import { Comment } from "@/types/comment";
 @Component
 export default class Bbs extends Vue {
   // 現在の記事一覧
@@ -52,13 +62,20 @@ export default class Bbs extends Vue {
   addArticle(): void {
     let articles = this.$store.getters.getArticles;
     let newId = 0;
-    if (articles.length) {
+    if (articles.length !== 0) {
       newId = articles[0].id + 1;
     }
     // ミューテーションのaddArticleメソッドを呼ぶ
     this.$store.commit("addArticle", {
-      article: new Article(newId, this.articleName, this.articleContent, []),
+      article: new Article(
+        newId,
+        this.articleName,
+        this.articleContent,
+        new Array<Comment>()
+      ),
     });
+    this.articleName = "";
+    this.articleContent = "";
   }
 
   /**

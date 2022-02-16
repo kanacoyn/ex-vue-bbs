@@ -18,7 +18,7 @@ export default new Vuex.Store({
         new Comment(11, "吉田", "吉田さんのコメント", 1),
       ]),
     ],
-  }, // end state
+  },
   mutations: {
     /**
      * 記事を追加する.
@@ -29,37 +29,6 @@ export default new Vuex.Store({
       // 受け取ったpayload内のarticleをstateのarticlesの０番目に追加する
       state.articles.unshift(payload.article);
     },
-    /**
-     * コメントを追加する.
-     * @param state
-     * @param payload
-     */
-    // addComment(state, payload) {
-    //   // 追加対象の記事を検索する
-    //   const article = state.articles.find(
-    //     (article) => article.id === comment.articleId
-    //   );
-    //   // payloadからコメントオブジェクトを生成する
-    //   const comment = new Comment(
-    //     payload.comment.id,
-    //     payload.comment.name,
-    //     payload.comment.content,
-    //     payload.comment.articleId
-    //   );
-    //   // commentListにコメントを追加;
-    //     // article.commentList.unshift(comment);
-    //   }
-    // },
-
-    /**
-     * 記事を削除する.
-     * @param state
-     * @param payload
-     */
-    // deleteArticle(state, payload) {
-    //   // 渡されたpayload中のarticleindexから一件だけ削除する
-    //   state.articles.splice(payload.articleIndex, 1);
-    // },
   },
 
   actions: {},
@@ -67,7 +36,8 @@ export default new Vuex.Store({
   getters: {
     /**
      * 記事一覧を返す.
-     * @param state
+     * @param state - ステート
+     * @returns 記事一覧
      */
     getArticles(state) {
       // stateのarticleを返す

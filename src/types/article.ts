@@ -5,6 +5,7 @@ import { Comment } from "@/types/comment";
 export class Article {
   constructor(
     private _id: number,
+
     private _name: string,
     private _content: string,
     private _commentList: Array<Comment>
