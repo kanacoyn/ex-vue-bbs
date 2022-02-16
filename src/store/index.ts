@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { Article } from "@/types/article";
+import { Comment } from "@/types/comment";
 
 Vue.use(Vuex);
 
@@ -25,27 +26,42 @@ export default new Vuex.Store({
      * @param payload
      */
     addArticle(state, payload) {
-      // 受け取ったpayloadないのarticleをstateのarticlesの０番目に追加する
+      // 受け取ったpayload内のarticleをstateのarticlesの０番目に追加する
+      state.articles.unshift(payload.article);
     },
-
     /**
-     * コメントを追加する
+     * コメントを追加する.
      * @param state
      * @param payload
      */
-    addComment(state, payload) {
-      //  渡されたpayloadの中のarticleから追加対象を検索する
-    },
+    // addComment(state, payload) {
+    //   // 追加対象の記事を検索する
+    //   const article = state.articles.find(
+    //     (article) => article.id === comment.articleId
+    //   );
+    //   // payloadからコメントオブジェクトを生成する
+    //   const comment = new Comment(
+    //     payload.comment.id,
+    //     payload.comment.name,
+    //     payload.comment.content,
+    //     payload.comment.articleId
+    //   );
+    //   // commentListにコメントを追加;
+    //     // article.commentList.unshift(comment);
+    //   }
+    // },
 
     /**
      * 記事を削除する.
      * @param state
      * @param payload
      */
-    deleteArticle(state, payload) {
-      // 渡されたpayload中のarticleindexから一件だけ削除する
-    },
+    // deleteArticle(state, payload) {
+    //   // 渡されたpayload中のarticleindexから一件だけ削除する
+    //   state.articles.splice(payload.articleIndex, 1);
+    // },
   },
+
   actions: {},
   modules: {},
   getters: {
@@ -55,6 +71,7 @@ export default new Vuex.Store({
      */
     getArticles(state) {
       // stateのarticleを返す
+      return state.articles;
     },
   },
 });

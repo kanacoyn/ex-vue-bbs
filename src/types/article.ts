@@ -1,3 +1,7 @@
+import { Comment } from "@/types/comment";
+/**
+ * 記事を投稿するためのクラス.
+ */
 export class Article {
   constructor(
     private _id: number,
