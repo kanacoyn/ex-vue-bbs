@@ -1,3 +1,6 @@
+/**
+ * コメントを投稿するためのクラス.
+ */
 export class Comment {
   constructor(
     private _id: number,
