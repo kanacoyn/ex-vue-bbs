@@ -20,6 +20,11 @@
       <div>投稿者名：{{ article.name }}</div>
       <div>投稿内容：{{ article.content }}</div>
       <br />
+      <form>
+        <button type="button" v-on:click="deleteArticle(articleIndex)">
+          投稿を削除
+        </button>
+      </form>
 
       <div v-for="comment of article.commentList" v-bind:key="comment.id">
         <br />
@@ -102,16 +107,6 @@ export default class Bbs extends Vue {
     this.commentName = "";
     this.commentContent = "";
   }
-
-  /**
-   * 記事を削除する.
-   * @param state
-   * @param payload
-   */
-  // deleteArticle(state, payload) {
-  //   // 渡されたpayload中のarticleindexから一件だけ削除する
-  //   state.articles.splice(payload.articleIndex, 1);
-  // },
 
   /**
    * 記事を削除する.

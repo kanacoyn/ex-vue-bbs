@@ -47,6 +47,15 @@ export default new Vuex.Store({
         article.commentList.unshift(payload.comment);
       }
     },
+
+    /**
+     * 記事をコメント共に削除する.
+     * @param state -ステート
+     * @param payload -ペイロード
+     */
+    deleteArticle(state, payload) {
+      state.articles.splice(payload.articleIndex, 1);
+    },
   },
 
   actions: {},
