@@ -3,11 +3,11 @@
     <h1>掲示板</h1>
     <form>
       <div>
-        投稿者名:
+        投稿者名:<br />
         <input type="text" v-model="articleName" />
       </div>
       <div>
-        投稿内容:
+        投稿内容:<br />
         <textarea v-model="articleContent" rows="5" cols="70"></textarea>
       </div>
       <br />
@@ -20,13 +20,22 @@
       <div>投稿者名：{{ article.name }}</div>
       <div>投稿内容：{{ article.content }}</div>
       <br />
-      <hr />
 
       <div v-for="comment of article.commentList" v-bind:key="comment.id">
+        <br />
         <div>コメント者名：{{ comment.name }}</div>
         <div>コメント内容：{{ comment.content }}</div>
         <br />
       </div>
+
+      <div>名前：</div>
+      <input type="text" v-model="commentName" /><br />
+      コメント:<br />
+      <textarea v-model="commentContent" rows="5" cols="40"></textarea><br />
+      <button type="button" v-on:click="addComment(article.id)">
+        コメントする</button
+      ><br />
+      <hr />
     </div>
   </div>
 </template>
@@ -77,6 +86,32 @@ export default class Bbs extends Vue {
     this.articleName = "";
     this.articleContent = "";
   }
+
+  /**
+   * コメントを追加する
+   */
+  addComment(articleId: number): void {
+    this.$store.commit("addComment", {
+      comment: new Comment(
+        -1,
+        this.commentName,
+        this.commentContent,
+        articleId
+      ),
+    });
+    this.commentName = "";
+    this.commentContent = "";
+  }
+
+  /**
+   * 記事を削除する.
+   * @param state
+   * @param payload
+   */
+  // deleteArticle(state, payload) {
+  //   // 渡されたpayload中のarticleindexから一件だけ削除する
+  //   state.articles.splice(payload.articleIndex, 1);
+  // },
 
   /**
    * 記事を削除する.

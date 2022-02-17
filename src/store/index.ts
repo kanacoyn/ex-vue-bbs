@@ -11,11 +11,11 @@ export default new Vuex.Store({
     articles: [
       new Article(3, "佐藤", "佐藤さんの記事", []),
       new Article(2, "山田", "山田さんの記事", [
-        new Comment(13, "山崎", "山崎さんのコメント", 2),
+        new Comment(13, "山崎", "山田の記事へコメントした山崎さん", 2),
       ]),
       new Article(1, "伊藤", "伊藤さんの記事", [
-        new Comment(12, "鈴木", "鈴木さんのコメント", 1),
-        new Comment(11, "吉田", "吉田さんのコメント", 1),
+        new Comment(12, "鈴木", "伊藤の記事にコメントした鈴木さん", 1),
+        new Comment(11, "吉田", "伊藤の記事にコメントした吉田さん", 1),
       ]),
     ],
   },
@@ -28,6 +28,24 @@ export default new Vuex.Store({
     addArticle(state, payload) {
       // 受け取ったpayload内のarticleをstateのarticlesの０番目に追加する
       state.articles.unshift(payload.article);
+    },
+
+    /**
+     * コメントを追加する.
+     * @param state -ステート
+     * @param payload -ペイロード
+     */
+    addComment(state, payload) {
+      // 追加対象の記事を検索する
+      const newArray = state.articles.filter(
+        (article) => article.id === payload.comment.articleId
+      );
+      const article = newArray[0];
+      // payloadからコメントオブジェクトを生成する
+      if (article) {
+        // commentListにコメントを追加;
+        article.commentList.unshift(payload.comment);
+      }
     },
   },
 
