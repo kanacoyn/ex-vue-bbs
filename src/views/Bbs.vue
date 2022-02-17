@@ -15,7 +15,10 @@
       <button type="button" v-on:click="addArticle()">記事投稿</button>
     </form>
     <hr />
-    <div v-for="article of currentArticleList" v-bind:key="article.id">
+    <div
+      v-for="(article, articleIndex) of currentArticleList"
+      v-bind:key="article.id"
+    >
       <div>記事ID：{{ article.id }}</div>
       <div>投稿者名：{{ article.name }}</div>
       <div>投稿内容：{{ article.content }}</div>
